@@ -17,4 +17,6 @@ func main() {
 	}
 
 	fmt.Println(models.GetAllMovies())
+	fmt.Println(models.GetAllActors())
+	fmt.Println(models.GetAllGenre())
 }

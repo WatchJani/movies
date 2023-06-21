@@ -1,29 +1,24 @@
 package models
 
 import (
-	"time"
+	"github.com/WatchJani/movies.git/db"
 )
 
 type Actor struct {
-	ActorID       uint
-	ActorName     string
-	ActorLastName string
-	ActorImage    string
-	ActorBirth    time.Time
+	ActorID       uint   `db:"actorid"`
+	ActorName     string `db:"actorname"`
+	ActorLastName string `db:"actorlastname"`
+	ActorImage    string `db:"actorimage"`
 }
 
-// const (
-// 	GET_ALL = "SELECT * FROM movies.movies;"
-// )
+const (
+	GET_ALL_ACTORS = "SELECT * FROM movies.actor;"
+)
 
-// func GetAll() *[]Actor {
-// 	var actors []Actor
+func GetAllActors() *[]Actor {
+	var actors []Actor
 
-// 	err := db.Select(&actors, GET_ALL)
+	ErrorHandler(db.Select(&actors, GET_ALL_ACTORS))
 
-// 	if err != nil {
-// 		log.Println(err)
-// 	}
-
-// 	return &actors
-// }
+	return &actors
+}
