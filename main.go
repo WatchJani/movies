@@ -2,12 +2,19 @@ package main
 
 import (
 	"fmt"
+	"log"
 
-	actors "github.com/WatchJani/movies.git/models"
+	"github.com/WatchJani/movies.git/db"
+	"github.com/WatchJani/movies.git/models"
+	_ "github.com/lib/pq"
 )
 
 func main() {
+	err := db.Init()
 
-	fmt.Println(actors.GetAllActor())
+	if err != nil {
+		log.Println("Database is not connected!")
+	}
 
+	fmt.Println(models.GetAllMovies())
 }

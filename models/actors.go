@@ -1,6 +1,8 @@
 package models
 
-import "time"
+import (
+	"time"
+)
 
 type Actor struct {
 	ActorID       uint
@@ -10,8 +12,18 @@ type Actor struct {
 	ActorBirth    time.Time
 }
 
-func GetAllActor() *[]Actor {
-	var actors []Actor
+// const (
+// 	GET_ALL = "SELECT * FROM movies.movies;"
+// )
 
-	return &actors
-}
+// func GetAll() *[]Actor {
+// 	var actors []Actor
+
+// 	err := db.Select(&actors, GET_ALL)
+
+// 	if err != nil {
+// 		log.Println(err)
+// 	}
+
+// 	return &actors
+// }
