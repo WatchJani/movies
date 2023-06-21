@@ -18,5 +18,5 @@ func Init() error {
 }
 
 func Select(dest interface{}, query string, args ...interface{}) error {
-	return db.Select(dest, query)
+	return db.Select(dest, query, args...)
 }
