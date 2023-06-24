@@ -1,15 +1,17 @@
 package models
 
-import "github.com/WatchJani/movies.git/db"
+import (
+	"github.com/WatchJani/movies.git/db"
+)
 
 type Genre struct {
-	GenreID          uint   `db:"genreid"`
-	GenreName        string `db:"genrename"`
-	GenreDescription string `db:"genredescription"`
+	GenreID          uint   `db:"GenreID"`
+	GenreName        string `db:"GenreName"`
+	GenreDescription string `db:"GenreDescription"`
 }
 
 const (
-	GET_ALL_GENRE = "SELECT * FROM movies.genre;"
+	GET_ALL_GENRE = "SELECT * FROM heroku_d0920392b7eace1.genre;"
 )
 
 func GetAllGenre() *[]Genre {

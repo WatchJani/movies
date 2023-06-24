@@ -5,20 +5,17 @@ import (
 )
 
 type Actor struct {
-	ActorID       uint   `db:"actorid"`
-	ActorName     string `db:"actorname"`
-	ActorLastName string `db:"actorlastname"`
-	ActorImage    string `db:"actorimage"`
-}
-
-type ActorMovies struct {
-	MovieName string `db:"moviename"`
-	ActorName string `db:"actorname"`
+	ActorID       uint   `db:"ActorID"`
+	ActorName     string `db:"ActorName"`
+	ActorLastName string `db:"ActorLastName"`
+	ActorImage    string `db:"ActorImage"`
 }
 
 const (
-	GET_ALL_ACTORS       = "SELECT * FROM movies.actor;"
-	GET_ALL_ACTOR_MOVIES = "SELECT a.actorname, m.moviename FROM movies.actor AS a JOIN movies.movieactor AS ma ON a.actorid = ma.actorid JOIN movies.movies AS m ON ma.movieid = m.movieid WHERE a.actorname = $1"
+	GET_ALL_ACTORS   = "SELECT * FROM heroku_d0920392b7eace1.actor;"
+	INSERT_NEW_ACTOR = "INSERT INTO `heroku_d0920392b7eace1`.`actor` (`ActorName`, `ActorLastName`, `ActorImage`) VALUES (?,?,?)"
+	DELETE_ACTOR     = "DELETE FROM heroku_d0920392b7eace1.actor WHERE actorID = ?;"
+	PUT_ACTOR        = "UPDATE heroku_d0920392b7eace1.actor SET ActorName = ?, ActorLastName = ?, ActorImage = ? WHERE ActorID = ?;"
 )
 
 func GetAllActors() *[]Actor {
@@ -29,10 +26,20 @@ func GetAllActors() *[]Actor {
 	return &actors
 }
 
-func GetAllActorMovies() *[]ActorMovies {
-	var actorMovies []ActorMovies
+func InsertActor(name, lastName, image string) error {
+	_, err := db.Insert(INSERT_NEW_ACTOR, name, lastName, image)
 
-	ErrorHandler(db.Select(&actorMovies, GET_ALL_ACTOR_MOVIES, "Tom"))
+	return err
+}
 
-	return &actorMovies
+func DeleteActor(actorID string) error {
+	_, err := db.Delete(DELETE_ACTOR, actorID)
+
+	return err
+}
+
+func UpdateActor(actorName, actorLastName, actorImage, actorID string) error {
+	_, err := db.Update(PUT_ACTOR, actorName, actorLastName, actorImage, actorID)
+
+	return err
 }
